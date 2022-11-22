@@ -127,7 +127,7 @@ class SignUpConfirming extends SignUpState {
 /// {@template amplify_auth_cognito.sign_up_success}
 /// The user successfully signed up.
 /// {@endtemplate}
-class SignUpSuccess extends SignUpState {
+class SignUpSuccess extends SignUpState with SuccessState {
   /// {@macro amplify_auth_cognito.sign_up_success}
   const SignUpSuccess() : super._();
 
