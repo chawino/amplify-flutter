@@ -108,8 +108,8 @@ void main() {
           userConfirmed: true,
         ),
       );
-      stateMachine.dispatch(AuthEvent.configure(mockConfig));
-      await stateMachine.stream.whereType<AuthConfigured>().first;
+      stateMachine.dispatch(ConfigurationEvent.configure(mockConfig));
+      await stateMachine.stream.whereType<Configured>().first;
 
       stateMachine
         ..addInstance<CognitoIdentityProviderClient>(client)
@@ -132,8 +132,8 @@ void main() {
         ),
         confirmSignUp: (input) async => ConfirmSignUpResponse(),
       );
-      stateMachine.dispatch(AuthEvent.configure(mockConfig));
-      await stateMachine.stream.whereType<AuthConfigured>().first;
+      stateMachine.dispatch(ConfigurationEvent.configure(mockConfig));
+      await stateMachine.stream.whereType<Configured>().first;
 
       stateMachine
         ..addInstance<CognitoIdentityProviderClient>(client)
@@ -166,8 +166,8 @@ void main() {
       var client = MockCognitoIdentityProviderClient(
         signUp: (input) async => throw _SignUpException(),
       );
-      stateMachine.dispatch(AuthEvent.configure(mockConfig));
-      await stateMachine.stream.whereType<AuthConfigured>().first;
+      stateMachine.dispatch(ConfigurationEvent.configure(mockConfig));
+      await stateMachine.stream.whereType<Configured>().first;
 
       stateMachine
         ..addInstance<CognitoIdentityProviderClient>(client)
