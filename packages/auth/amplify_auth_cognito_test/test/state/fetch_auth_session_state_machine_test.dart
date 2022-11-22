@@ -166,7 +166,7 @@ void main() {
         expect(session.identityId, isNull);
         expect(session.credentials, isNull);
 
-        expect(sm.getLatestResult(), completion(state));
+        expect(stateMachine.loadSession(), completion(session));
       });
 
       test('(isSignedIn=true, getAwsCredentials=true)', () async {
@@ -217,7 +217,7 @@ void main() {
         expect(session.credentials!.sessionToken, isNull);
         expect(session.credentials!.expiration, isNull);
 
-        expect(sm.getLatestResult(), completion(state));
+        expect(stateMachine.loadSession(), completion(session));
       });
 
       group('user pool-only', () {
@@ -240,9 +240,7 @@ void main() {
           );
 
           expect(
-            stateMachine
-                .expect(FetchAuthSessionStateMachine.type)
-                .getLatestResult(),
+            stateMachine.loadSession(),
             completes,
           );
         });
@@ -255,9 +253,7 @@ void main() {
           );
 
           expect(
-            stateMachine
-                .expect(FetchAuthSessionStateMachine.type)
-                .getLatestResult(),
+            stateMachine.loadSession(),
             throwsA(isA<InvalidAccountTypeException>()),
           );
         });
@@ -368,7 +364,7 @@ void main() {
           final state = sm.currentState as FetchAuthSessionFailure;
           expect(state.exception, isA<_FetchAuthSessionException>());
           expect(
-            sm.getLatestResult(),
+            stateMachine.loadSession(),
             throwsA(isA<_FetchAuthSessionException>()),
           );
         });
@@ -503,7 +499,7 @@ void main() {
           final state = sm.currentState as FetchAuthSessionFailure;
           expect(state.exception, isA<_FetchAuthSessionException>());
           expect(
-            sm.getLatestResult(),
+            stateMachine.loadSession(),
             throwsA(isA<_FetchAuthSessionException>()),
           );
         });
@@ -763,7 +759,7 @@ void main() {
         final state = sm.currentState as FetchAuthSessionFailure;
         expect(state.exception, isA<_FetchAuthSessionException>());
         expect(
-          sm.getLatestResult(),
+          stateMachine.loadSession(),
           throwsA(isA<_FetchAuthSessionException>()),
         );
       });
