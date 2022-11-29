@@ -12,11 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/// Amplify Analytics Pinpoint for Dart
-library amplify_analytics_pinpoint_dart;
+/// {@template amplify_analytics_pinpoint.flutter_legacy_native_data_provider}
+/// Provides legacy data stored by Amplify Analytics iOS and Android.
+/// {@endtemplate}
 
-export 'src/analytics_plugin_impl.dart';
-export 'src/impl/flutter_provider_interfaces/app_lifecycle_provider.dart';
-export 'src/impl/flutter_provider_interfaces/cached_events_path_provider.dart';
-export 'src/impl/flutter_provider_interfaces/device_context_info_provider.dart';
-export 'src/impl/flutter_provider_interfaces/legacy_native_data_provider.dart';
+export 'flutter_legacy_native_data_provider_stub.dart'
+    if (dart.library.io) 'flutter_legacy_native_data_provider_io.dart';

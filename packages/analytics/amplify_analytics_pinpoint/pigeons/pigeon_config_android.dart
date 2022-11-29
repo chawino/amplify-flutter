@@ -18,24 +18,32 @@ import 'package:pigeon/pigeon.dart';
 
 @ConfigurePigeon(
   PigeonOptions(
-    dartOut: 'lib/src/legacy_native_data_migrators/messages.android.g.dart',
+    dartOut:
+        'lib/src/legacy_native_data_provider/pigeon_data_provider.android.g.dart',
     javaOut:
-        '../android/src/main/java/com/amazonaws/amplify/amplify_analytics_pinpoint/amplify_analytics_pinpoint/Messages.java',
+        'android/src/main/java/com/amazonaws/amplify/amplify_analytics_pinpoint/amplify_analytics_pinpoint/Messages.java',
     javaOptions: JavaOptions(
       className: "Messages",
       package:
-          'com.amazonaws.amplify.amplify_secure_storage.amplify_secure_storage',
+          'com.amazonaws.amplify.amplify_analytics_pinpoint.amplify_analytics_pinpoint',
     ),
     copyrightHeader: 'pigeons/copyright.txt',
   ),
 )
 @HostApi()
-abstract class RetrieveLegacyData {
+abstract class PigeonDataProvider {
   @async
-  @TaskQueue(type: TaskQueueType.serialBackgroundThread)
-  String? read(String namespace, String key);
+  void initialize(String pinpointAppId);
 
   @async
-  @TaskQueue(type: TaskQueueType.serialBackgroundThread)
-  void delete(String namespace, String key);
+  String? getEndpointId();
+
+  @async
+  String? getGlobalMetrics();
+
+  @async
+  String? getGlobalAttributes();
+
+  @async
+  void deleteLegacyData();
 }
