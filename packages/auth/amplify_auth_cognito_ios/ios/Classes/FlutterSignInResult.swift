@@ -65,7 +65,7 @@ func setCodeDeliveryDetails(res: AmplifyOperation<AuthSignInRequest, AuthSignInR
           if case let .confirmSignInWithSMSMFACode(deliveryDetails, _) = signInResult.nextStep {
             if case let .sms(e) = deliveryDetails.destination {
               deliveryMap["deliveryMedium"] = "SMS"
-              deliveryMap["destination"] = e! as String
+              deliveryMap["destination"] = e == nil ? "" : e! as String
             }
           }
           if case .resetPassword(_) = signInResult.nextStep {}
